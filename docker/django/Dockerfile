@@ -8,7 +8,7 @@ RUN python -m venv /env \
 
 ENV VIRTUAL_ENV /env
 ENV PATH /env/bin:$PATH
-ENV DJANGO_SETTINGS_MODULE=breakingbadapi_task.settings
+ENV DJANGO_SETTINGS_MODULE=breakingbadapi_task.settings.dev
 
 WORKDIR /app
 
