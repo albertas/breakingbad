@@ -13,7 +13,13 @@ class Character(models.Model):
     birthday = models.DateField(null=True)
     status = models.CharField(choices=STATUS_CHOICES, max_length=13)
 
+    def __str__(self):
+        return self.name
+
 
 class Occupation(models.Model):
     title = models.CharField(max_length=70)
     character = models.ManyToManyField("Character")
+
+    def __str__(self):
+        return self.title
