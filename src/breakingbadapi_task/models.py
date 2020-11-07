@@ -16,4 +16,4 @@ class Character(models.Model):
 
 class Occupation(models.Model):
     title = models.CharField(max_length=70)
-    character = models.ForeignKey("Character", on_delete=models.CASCADE)
+    character = models.ManyToManyField("Character")
