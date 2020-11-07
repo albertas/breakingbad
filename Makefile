@@ -4,3 +4,6 @@ build:
 
 container:
 	docker exec -it breakingbadapi_task_django_1 bash
+
+test:
+	DJANGO_SETTINGS_MODULE=breakingbadapi_task.settings.test pytest $(TEST_ME_PLEASE)
