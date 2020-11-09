@@ -7,3 +7,6 @@ container:
 
 test:
 	DJANGO_SETTINGS_MODULE=breakingbadapi_task.settings.test pytest $(TEST_ME_PLEASE)
+
+shell:
+	django-admin shell_plus
