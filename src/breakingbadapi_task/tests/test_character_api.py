@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse
+from parameterized import parameterized
 
 
 class CharacterAPITests(TestCase):
@@ -62,3 +63,27 @@ class CharacterAPITests(TestCase):
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(len(resp.json()), 1)
         self.assertEqual(resp.json()[0]["name"], "Walter White")
+
+    @parameterized.expand(
+        [
+            ("name", "1", ["Jesse Pinkman", "Skyler White", "Walter White"]),
+            ("name", "0", ["Walter White", "Skyler White", "Jesse Pinkman"]),
+            ("birthday", "1", ["1958-09-07", "1970-08-11", "1984-09-24"]),
+            ("birthday", "0", ["1984-09-24", "1970-08-11", "1958-09-07"]),
+        ]
+    )
+    def test_ordering(self, order_by, ascending, result):
+        url = reverse("character-list")
+        query = "&".join(
+            [
+                f"orderBy={order_by}",
+                f"ascending={ascending}",
+            ]
+        )
+
+        resp = self.client.get(f"{url}?{query}")
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(len(resp.json()), 3)
+
+        for character_data, expected in zip(resp.json(), result):
+            self.assertEqual(character_data.get(order_by), expected)

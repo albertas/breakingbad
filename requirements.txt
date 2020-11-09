@@ -53,3 +53,5 @@ ruamel.yaml==0.16.12
 ruamel.yaml.clib==0.2.2
 uritemplate==3.0.1
 urllib3==1.25.11
+
+parameterized==0.7.4
