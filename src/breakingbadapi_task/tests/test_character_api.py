@@ -46,3 +46,19 @@ class CharacterAPITests(TestCase):
     def test_delete_character(self):
         resp = self.client.delete(reverse("character-detail", kwargs={"pk": "1"}))
         self.assertEqual(resp.status_code, 204)
+
+    def test_filters(self):
+        url = reverse("character-list")
+        query = "&".join(
+            [
+                "name=walter",
+                "birthday=1958",
+                "state=presumed dead",
+                "occupation=king",
+            ]
+        )
+
+        resp = self.client.get(f"{url}?{query}")
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(len(resp.json()), 1)
+        self.assertEqual(resp.json()[0]["name"], "Walter White")
