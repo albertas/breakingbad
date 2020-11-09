@@ -1,7 +1,9 @@
-from django.urls import path
+from django.urls import include, path
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
+
+from breakingbadapi_task import views
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -15,5 +17,13 @@ schema_view = get_schema_view(
 
 
 urlpatterns = [
+    path("api/character/", views.CharacterViewSet.as_view({"get": "list"}), name="character-list"),
+    path(
+        "api/character/<int:pk>/",
+        views.CharacterViewSet.as_view(
+            {"get": "retrieve", "post": "create", "patch": "partial_update", "delete": "destroy",}
+        ),
+        name="character-detail",
+    ),
     path("api/swagger/", schema_view.with_ui("swagger", cache_timeout=0), name="swagger"),
 ]
