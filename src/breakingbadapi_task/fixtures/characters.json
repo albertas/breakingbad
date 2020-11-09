@@ -1,0 +1,99 @@
+[
+{
+    "model": "breakingbadapi_task.character",
+    "pk": 1,
+    "fields": {
+        "name": "Walter White",
+        "birthday": "1958-09-07",
+        "status": "Presumed dead"
+    }
+},
+{
+    "model": "breakingbadapi_task.character",
+    "pk": 2,
+    "fields": {
+        "name": "Jesse Pinkman",
+        "birthday": "1984-09-24",
+        "status": "Alive"
+    }
+},
+{
+    "model": "breakingbadapi_task.character",
+    "pk": 3,
+    "fields": {
+        "name": "Skyler White",
+        "birthday": "1970-08-11",
+        "status": "Alive"
+    }
+},
+{
+    "model": "breakingbadapi_task.occupation",
+    "pk": 1,
+    "fields": {
+        "title": "High School Chemistry Teacher",
+        "character": [
+            1
+        ]
+    }
+},
+{
+    "model": "breakingbadapi_task.occupation",
+    "pk": 2,
+    "fields": {
+        "title": "Meth King Pin",
+        "character": [
+            1
+        ]
+    }
+},
+{
+    "model": "breakingbadapi_task.occupation",
+    "pk": 3,
+    "fields": {
+        "title": "Meth Dealer",
+        "character": [
+            2
+        ]
+    }
+},
+{
+    "model": "breakingbadapi_task.occupation",
+    "pk": 4,
+    "fields": {
+        "title": "House wife",
+        "character": [
+            3
+        ]
+    }
+},
+{
+    "model": "breakingbadapi_task.occupation",
+    "pk": 5,
+    "fields": {
+        "title": "Book Keeper",
+        "character": [
+            3
+        ]
+    }
+},
+{
+    "model": "breakingbadapi_task.occupation",
+    "pk": 6,
+    "fields": {
+        "title": "Car Wash Manager",
+        "character": [
+            3
+        ]
+    }
+},
+{
+    "model": "breakingbadapi_task.occupation",
+    "pk": 7,
+    "fields": {
+        "title": "Taxi Dispatcher",
+        "character": [
+            3
+        ]
+    }
+}
+]
