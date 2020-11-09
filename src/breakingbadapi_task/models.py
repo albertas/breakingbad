@@ -19,7 +19,7 @@ class Character(models.Model):
 
 class Occupation(models.Model):
     title = models.CharField(max_length=70)
-    character = models.ManyToManyField("Character")
+    character = models.ManyToManyField("Character", related_name="occupation")
 
     def __str__(self):
         return self.title
