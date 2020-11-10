@@ -1,3 +1,4 @@
+from django.contrib.gis.db import models as gis_models
 from django.db import models
 
 
@@ -23,3 +24,9 @@ class Occupation(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Location(models.Model):
+    character = models.ForeignKey("Character", related_name="locations", on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True, editable=False, null=False, blank=False)
+    point = gis_models.PointField()
