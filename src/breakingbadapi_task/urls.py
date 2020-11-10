@@ -17,6 +17,7 @@ schema_view = get_schema_view(
 
 
 urlpatterns = [
+    path("", views.index, name="index"),
     path("api/character/", views.CharacterViewSet.as_view({"get": "list"}), name="character-list"),
     path(
         "api/character/<int:pk>/",
