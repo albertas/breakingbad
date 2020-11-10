@@ -49,11 +49,11 @@ class LocationFilter(filters.FilterSet):
         help_text='Filter by distance in KMs from a given point ("latitude" and "longitude" params)',
     )
     latitude = filters.CharFilter(
-        method="check_if_needed_all_values_are_provided",
+        method="check_if_all_needed_values_are_provided",
         help_text='"latitude" of a given point to filter by distance from',
     )
     longitude = filters.CharFilter(
-        method="check_if_needed_all_values_are_provided",
+        method="check_if_all_needed_values_are_provided",
         help_text='"longitude" of a given point to filter by distance from',
     )
     datetime_from = filters.CharFilter(
@@ -77,7 +77,7 @@ class LocationFilter(filters.FilterSet):
             "datetime_until",
         ]
 
-    def check_if_needed_all_values_are_provided(self, queryset, *args, **kwargs):
+    def check_if_all_needed_values_are_provided(self, queryset, *args, **kwargs):
         if (
             "latitude" not in self.data
             or "longitude" not in self.data
@@ -91,7 +91,7 @@ class LocationFilter(filters.FilterSet):
         return queryset
 
     def filter_by_distance(self, queryset, name, value):
-        self.check_if_needed_all_values_are_provided(queryset)
+        self.check_if_all_needed_values_are_provided(queryset)
 
         distance = float(value)
         latitude = float(self.data["latitude"])
