@@ -50,7 +50,7 @@
     "fields": {
         "character": 2,
         "timestamp": "2020-11-10T00:00:00.00Z",
-        "point": "SRID=4326;POINT (0 0)"
+        "point": "SRID=4326;POINT (2.001 2)"
     }
 },
 {
@@ -59,7 +59,7 @@
     "fields": {
         "character": 1,
         "timestamp": "2020-11-10T21:15:00.00Z",
-        "point": "SRID=4326;POINT (0 0)"
+        "point": "SRID=4326;POINT (2 2)"
     }
 }
 ]

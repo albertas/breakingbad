@@ -88,3 +88,19 @@ class LocationAPITests(TestCase):
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(len(resp.json()), 3)
         self.assertEqual(resp.json()[0]["character_name"], "Walter White")
+
+    def test_filter_by_distance_from_a_point(self, *args):
+        url = reverse("location-list")
+        query = "&".join(
+            [
+                "distance=1",
+                "latitude=2.0",
+                "longitude=2.0",
+            ]
+        )
+
+        resp = self.client.get(f"{url}?{query}")
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(len(resp.json()), 2)
+        self.assertEqual(resp.json()[0]["character_name"], "Walter White")
+        self.assertEqual(resp.json()[1]["character_name"], "Jesse Pinkman")

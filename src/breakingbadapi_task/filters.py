@@ -1,4 +1,8 @@
+from django.contrib.gis.db.models.functions import Distance
+from django.contrib.gis.geos import Point
+from django.contrib.gis.measure import D
 from django_filters import rest_framework as filters
+from rest_framework import serializers
 
 from breakingbadapi_task.models import Character, Location
 
@@ -40,6 +44,46 @@ class CharacterFilter(filters.FilterSet):
 
 
 class LocationFilter(filters.FilterSet):
+    distance = filters.CharFilter(
+        method="filter_by_distance",
+        help_text="Ordering order: use 0 for descending and 1 for ascending",
+    )
+    latitude = filters.CharFilter(
+        method="check_if_needed_all_values_are_provided",
+        help_text="Ordering order: use 0 for descending and 1 for ascending",
+    )
+    longitude = filters.CharFilter(
+        method="check_if_needed_all_values_are_provided",
+        help_text="Ordering order: use 0 for descending and 1 for ascending",
+    )
+
     class Meta:
         model = Location
-        fields = ["character", "timestamp"]
+        fields = ["character", "timestamp", "distance", "latitude", "longitude"]
+
+    def check_if_needed_all_values_are_provided(self, queryset, *args, **kwargs):
+        if (
+            "latitude" not in self.data
+            or "longitude" not in self.data
+            or "distance" not in self.data
+        ):
+            message = (
+                'You have to provide "latitude" and "longitude" of a point '
+                'to filter by "distance" from it.'
+            )
+            raise serializers.ValidationError(message)
+        return queryset
+
+    def filter_by_distance(self, queryset, name, value):
+        self.check_if_needed_all_values_are_provided(queryset)
+
+        distance = float(value)
+        latitude = float(self.data["latitude"])
+        longitude = float(self.data["latitude"])
+        ref_point = Point(latitude, longitude)
+
+        return (
+            queryset.filter(point__distance_lte=(ref_point, D(km=distance)))
+            .annotate(distance=Distance("point", ref_point))
+            .order_by("distance")
+        )
