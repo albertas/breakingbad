@@ -4,7 +4,7 @@
 * Login to https://hub.docker.com/, because PostGIS image has to be downloaded from there.
 * Build, start and attach to docker container by running `make build` in the root directory of this project.
 * Load Breaking Bad character data from external source (https://breakingbadapi.com) by running this command inside the docker container: `django-admin loadcharacters`
-* Go to http://localhost:8000 or http://localhost:8000/api/swagger/ to engage with API endpoints using Swagger GUI. Don't forget to click "Try it out" button to be able to execute API query.
+* Go to http://localhost:8000 or http://localhost:8000/api/swagger/ to engage with API endpoints using Swagger GUI. Don't forget to click **"Try it out"** button to be able to execute API queries.
 
 
 # The Breaking Bad API task
