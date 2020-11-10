@@ -19,7 +19,7 @@ class CharacterAPITests(TestCase):
         self.assertEqual(resp.json()["status"], "Presumed dead")
 
     def test_create_character(self):
-        url = reverse("character-detail", kwargs={"pk": "1"})
+        url = reverse("character-detail", kwargs={"pk": "0"})
         new_character_data = {
             "name": "Test Name",
             "birthday": "1960-01-01",
@@ -27,6 +27,7 @@ class CharacterAPITests(TestCase):
         }
         resp = self.client.post(url, data=new_character_data)
         self.assertEqual(resp.status_code, 201)
+        self.assertEqual(resp.json()["id"], 4)
         self.assertEqual(resp.json()["name"], new_character_data["name"])
         self.assertEqual(resp.json()["birthday"], new_character_data["birthday"])
         self.assertEqual(resp.json()["status"], new_character_data["status"])
