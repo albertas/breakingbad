@@ -28,9 +28,15 @@ class Occupation(models.Model):
         return self.title
 
 
+def now():
+    """Wrapper which allows to monkey patch timezone.now() in tests"""
+    return timezone.now()
+
+
 class Location(models.Model):
+
     character = models.ForeignKey("Character", related_name="locations", on_delete=models.CASCADE)
-    timestamp = models.DateTimeField(default=timezone.now, null=False, blank=False)
+    timestamp = models.DateTimeField(default=now, null=False, blank=False)
     point = gis_models.PointField(default=Point(0, 0))
 
     def __str__(self):

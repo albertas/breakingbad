@@ -1,0 +1,65 @@
+[
+{
+    "model": "breakingbadapi_task.location",
+    "pk": 1,
+    "fields": {
+        "character": 1,
+        "timestamp": "2020-11-10T00:00:00.00Z",
+        "point": "SRID=4326;POINT (0 0)"
+    }
+},
+{
+    "model": "breakingbadapi_task.location",
+    "pk": 2,
+    "fields": {
+        "character": 1,
+        "timestamp": "2020-11-10T00:00:00.00Z",
+        "point": "SRID=4326;POINT (0 0)"
+    }
+},
+{
+    "model": "breakingbadapi_task.location",
+    "pk": 3,
+    "fields": {
+        "character": 1,
+        "timestamp": "2020-11-10T00:00:00.00Z",
+        "point": "SRID=4326;POINT (0 0)"
+    }
+},
+{
+    "model": "breakingbadapi_task.location",
+    "pk": 4,
+    "fields": {
+        "character": 2,
+        "timestamp": "2020-11-10T00:00:00.00Z",
+        "point": "SRID=4326;POINT (0 0)"
+    }
+},
+{
+    "model": "breakingbadapi_task.location",
+    "pk": 5,
+    "fields": {
+        "character": 2,
+        "timestamp": "2020-11-10T00:00:00.00Z",
+        "point": "SRID=4326;POINT (0 0)"
+    }
+},
+{
+    "model": "breakingbadapi_task.location",
+    "pk": 6,
+    "fields": {
+        "character": 2,
+        "timestamp": "2020-11-10T00:00:00.00Z",
+        "point": "SRID=4326;POINT (0 0)"
+    }
+},
+{
+    "model": "breakingbadapi_task.location",
+    "pk": 7,
+    "fields": {
+        "character": 1,
+        "timestamp": "2020-11-10T21:15:00.00Z",
+        "point": "SRID=4326;POINT (0 0)"
+    }
+}
+]
