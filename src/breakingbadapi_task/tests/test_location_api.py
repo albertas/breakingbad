@@ -136,3 +136,24 @@ class LocationAPITests(TestCase):
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(len(resp.json()), 4)
         self.assertEqual(resp.json()[0]["character_name"], "Walter White")
+
+    @parameterized.expand(
+        [("1", ("Walter White", "Jesse Pinkman")), ("0", ("Jesse Pinkman", "Walter White"))]
+    )
+    def test_ordering_when_filter_by_distance_is_applied(self, now_mock, ascending, names):
+        url = reverse("location-list")
+        query = "&".join(
+            [
+                "distance=1",
+                "latitude=2.0",
+                "longitude=2.0",
+                f"ascending={ascending}",
+            ]
+        )
+
+        resp = self.client.get(f"{url}?{query}")
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(len(resp.json()), 2)
+
+        for i, name in enumerate(names):
+            self.assertEqual(resp.json()[i]["character_name"], name)

@@ -65,6 +65,10 @@ class LocationFilter(filters.FilterSet):
         help_text="Until when Location records have to be provided e.g. 2020-11-10T24:00:00.00Z",
     )
     character_name = filters.CharFilter(field_name="character__name", lookup_expr="icontains")
+    ascending = filters.CharFilter(
+        method="do_nothing",
+        help_text="Order by distance: 0 for descending and 1 for ascending. Default is 1",
+    )
 
     class Meta:
         model = Location
@@ -100,10 +104,14 @@ class LocationFilter(filters.FilterSet):
         longitude = float(self.data["latitude"])
         ref_point = Point(latitude, longitude)
 
+        order_by = "distance"
+        if self.data.get("ascending", "1") == "0":
+            order_by = "-" + order_by
+
         return (
             queryset.filter(point__distance_lte=(ref_point, D(km=distance)))
             .annotate(distance=Distance("point", ref_point))
-            .order_by("distance")
+            .order_by(order_by)
         )
 
     def filter_datetime_from(self, queryset, name, value):
@@ -111,3 +119,6 @@ class LocationFilter(filters.FilterSet):
 
     def filter_datetime_until(self, queryset, name, value):
         return queryset.filter(timestamp__lt=value)
+
+    def do_nothing(self, queryset, name, value):
+        return queryset
