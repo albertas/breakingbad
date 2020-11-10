@@ -64,11 +64,13 @@ class LocationFilter(filters.FilterSet):
         method="filter_datetime_until",
         help_text="Until when Location records have to be provided e.g. 2020-11-10T24:00:00.00Z",
     )
+    character_name = filters.CharFilter(field_name="character__name", lookup_expr="icontains")
 
     class Meta:
         model = Location
         fields = [
             "character",
+            "character_name",
             "timestamp",
             "distance",
             "latitude",
