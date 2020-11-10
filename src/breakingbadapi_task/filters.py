@@ -42,4 +42,4 @@ class CharacterFilter(filters.FilterSet):
 class LocationFilter(filters.FilterSet):
     class Meta:
         model = Location
-        fields = ["character", "created_at"]
+        fields = ["character", "timestamp"]

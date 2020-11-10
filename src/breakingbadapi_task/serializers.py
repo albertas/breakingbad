@@ -16,4 +16,4 @@ class LocationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Location
-        fields = ["id", "character_name", "created_at", "point", "character"]
+        fields = ["id", "character_name", "timestamp", "point", "character"]
