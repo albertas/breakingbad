@@ -104,3 +104,17 @@ class LocationAPITests(TestCase):
         self.assertEqual(len(resp.json()), 2)
         self.assertEqual(resp.json()[0]["character_name"], "Walter White")
         self.assertEqual(resp.json()[1]["character_name"], "Jesse Pinkman")
+
+    def test_filter_by_date_range(self, *args):
+        url = reverse("location-list")
+        query = "&".join(
+            [
+                "datetime_from=2020-11-10T21:00:00.00Z",
+                "datetime_until=2020-11-10T22:00:00.00Z",
+            ]
+        )
+
+        resp = self.client.get(f"{url}?{query}")
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(len(resp.json()), 1)
+        self.assertEqual(resp.json()[0]["character_name"], "Walter White")

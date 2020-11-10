@@ -46,20 +46,36 @@ class CharacterFilter(filters.FilterSet):
 class LocationFilter(filters.FilterSet):
     distance = filters.CharFilter(
         method="filter_by_distance",
-        help_text="Ordering order: use 0 for descending and 1 for ascending",
+        help_text='Filter by distance in KMs from a given point ("latitude" and "longitude" params)',
     )
     latitude = filters.CharFilter(
         method="check_if_needed_all_values_are_provided",
-        help_text="Ordering order: use 0 for descending and 1 for ascending",
+        help_text='"latitude" of a given point to filter by distance from',
     )
     longitude = filters.CharFilter(
         method="check_if_needed_all_values_are_provided",
-        help_text="Ordering order: use 0 for descending and 1 for ascending",
+        help_text='"longitude" of a given point to filter by distance from',
+    )
+    datetime_from = filters.CharFilter(
+        method="filter_datetime_from",
+        help_text="From when Location records have to be provided e.g. 2020-11-10T10:00:00.00Z",
+    )
+    datetime_until = filters.CharFilter(
+        method="filter_datetime_until",
+        help_text="Until when Location records have to be provided e.g. 2020-11-10T24:00:00.00Z",
     )
 
     class Meta:
         model = Location
-        fields = ["character", "timestamp", "distance", "latitude", "longitude"]
+        fields = [
+            "character",
+            "timestamp",
+            "distance",
+            "latitude",
+            "longitude",
+            "datetime_from",
+            "datetime_until",
+        ]
 
     def check_if_needed_all_values_are_provided(self, queryset, *args, **kwargs):
         if (
@@ -87,3 +103,9 @@ class LocationFilter(filters.FilterSet):
             .annotate(distance=Distance("point", ref_point))
             .order_by("distance")
         )
+
+    def filter_datetime_from(self, queryset, name, value):
+        return queryset.filter(timestamp__gt=value)
+
+    def filter_datetime_until(self, queryset, name, value):
+        return queryset.filter(timestamp__lt=value)
