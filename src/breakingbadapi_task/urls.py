@@ -21,9 +21,27 @@ urlpatterns = [
     path(
         "api/character/<int:pk>/",
         views.CharacterViewSet.as_view(
-            {"get": "retrieve", "post": "create", "patch": "partial_update", "delete": "destroy",}
+            {
+                "get": "retrieve",
+                "post": "create",
+                "patch": "partial_update",
+                "delete": "destroy",
+            }
         ),
         name="character-detail",
+    ),
+    path("api/location/", views.LocationViewSet.as_view({"get": "list"}), name="location-list"),
+    path(
+        "api/location/<int:pk>/",
+        views.LocationViewSet.as_view(
+            {
+                "get": "retrieve",
+                "post": "create",
+                "patch": "partial_update",
+                "delete": "destroy",
+            }
+        ),
+        name="location-detail",
     ),
     path("api/swagger/", schema_view.with_ui("swagger", cache_timeout=0), name="swagger"),
 ]

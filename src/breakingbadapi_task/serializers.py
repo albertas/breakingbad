@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from breakingbadapi_task.models import Character
+from breakingbadapi_task.models import Character, Location
 
 
 class CharacterSerializer(serializers.ModelSerializer):
@@ -9,3 +9,11 @@ class CharacterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Character
         fields = ["id", "name", "birthday", "status", "occupation"]
+
+
+class LocationSerializer(serializers.ModelSerializer):
+    character_name = serializers.CharField(source="character.name", read_only=True)
+
+    class Meta:
+        model = Location
+        fields = ["id", "character_name", "created_at", "point", "character"]

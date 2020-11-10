@@ -1,6 +1,6 @@
 from django_filters import rest_framework as filters
 
-from breakingbadapi_task.models import Character
+from breakingbadapi_task.models import Character, Location
 
 
 class CharacterOrderingFilter(filters.OrderingFilter):
@@ -37,3 +37,9 @@ class CharacterFilter(filters.FilterSet):
 
     def do_nothing(self, queryset, name, value):
         return queryset
+
+
+class LocationFilter(filters.FilterSet):
+    class Meta:
+        model = Location
+        fields = ["character", "created_at"]
