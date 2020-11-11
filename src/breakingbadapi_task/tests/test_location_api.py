@@ -54,6 +54,28 @@ class LocationAPITests(TestCase):
                     "point": "SRID=4326;POINT (1 1)",
                 },
             ),
+            (
+                {
+                    "character": 1,
+                    "point": "0,0",
+                },
+                {
+                    "character": 1,
+                    "timestamp": "2020-01-01T00:00:00Z",
+                    "point": "SRID=4326;POINT (0 0)",
+                },
+            ),
+            (
+                {
+                    "character": 1,
+                    "point": "2,2",
+                },
+                {
+                    "character": 1,
+                    "timestamp": "2020-01-01T00:00:00Z",
+                    "point": "SRID=4326;POINT (2 2)",
+                },
+            ),
         ]
     )
     def test_create_location(self, now_mock, new_location_data, expected):
